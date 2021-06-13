@@ -1,0 +1,75 @@
+{% extends 'authentication/login.html' %}
+{% load static %}
+
+       {% block title%} <title>Register | MySiwie </title>{% endblock%}
+
+                            <!--end module-->
+                             {% block content%}
+
+                        <div class="col-lg-4 col-lg-offset-0 col-md-5 col-md-offset-0 col-8 col-offset-2">
+                            <div class="bar__module ml-4">
+                                <a class="btn btn--sm btn--primary type--uppercase" href="{% url 'login' %}">
+                                    <span class="btn__text">
+                                        Login
+                                    </span>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </nav>
+            <!--end bar-->
+        </div>
+        <div class="main-container">
+
+            <section class="imageblock switchable feature-large height-100">
+                <div class="imageblock__content col-lg-6 col-md-4 pos-right">
+                    <div class="background-image-holder">
+                        <img alt="image" src="{% static 'siwieapp/img/inner-7.jpg' %}" />
+                    </div>
+                </div>
+                <div class="container pos-vertical-center">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-7">
+                            <h2>Create a MySiwie account</h2>
+                            <p class="lead">Keep track on your daily industial activities with MySiwie</p>
+
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="text" name="username" placeholder="username" />
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="email" name="email" placeholder="Email Address" />
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="password" name="password1" placeholder="Password" required id="id_password1/>
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="password" name="password2" placeholder="Password Confrmation"required id="id_password2 />
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn--primary type--uppercase">Create Account</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <span class="type--fine-print">By signing up, you agree to the
+                                            <a href="#">Terms of Service</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <!--end row-->
+                            </form>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+        </div>
+{% endblock %}
+        <!--<div class="loader"></div>-->

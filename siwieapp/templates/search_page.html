@@ -1,0 +1,201 @@
+
+{% extends 'index.html' %}
+{% load static %}
+
+        {% block title%}<title>Career Single | MySiwie </title>{% endblock %}
+      {% block content%}
+        <div class="main-container">
+
+            <section class="text-center">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 col-lg-8">
+                            <h2>Showing results for “{{city}} {{keyword}}”</h2>
+                            <p class="lead">
+                                <span>{{count}}</span> results found
+                            </p>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+            <section>
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-8 col-lg-7">
+
+                            <ul class="results-list">
+                                <li>
+                                    <!-- begin of organization -->
+                                    <div>
+                                        {% if query_set%}
+                                        {% for intern in query_set%}
+                                        <a class="block" href="#">
+                                            </a><div class="feature feature-1 boxed boxed--border"><a class="block" href="#">
+                                                <span class="label">{{intern.state}}</span>
+                                                <h5>{{intern.name_of_org}}</h5>
+                                                <p>
+                                                    {{intern.address}}
+                                                </p>
+                                                <p>
+                                                    {{intern.state}}
+                                                </p>
+                                                </a><a href="{% url 'detail' intern.id%}">
+                                                    View
+                                                </a>
+                                            </div>
+                                        {% endfor%}
+
+                                        {% else %}
+                                        <h1>No result</h1>
+
+                                     {% endif %}
+                                    </div>
+                                    <!--end organization-->
+
+
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <div class="col-md-pull-8 col-md-4">
+                            <div class="boxed boxed--border boxed--lg bg--secondary">
+                                <div class="sidebar__widget">
+                                    <form action="#">
+                                        <div>
+                                            <label for="organization">Name of organization</label>
+                                            <input type="text" name="query" placeholder="organization name" id="organization">
+                                        </div> <br>
+                                        <div>
+                                            <label for="address">Address</label>
+                                            <input type="text" name="address" placeholder="Address" id="address">
+                                        </div> <br>
+                                        <div>
+                                            <label for="state">State</label>
+                                            <div class="input-select">
+                                                <select id="state" name="state">
+                                                    <option selected="" value="Default">State</option>
+                                                    <option value="Lagos">Lagos</option>
+                                                    <option value="Ibadan">Ibadan</option>
+                                                    <option value="Ekiti">Ekiti</option>
+                                                </select>
+                                            </div>
+                                        </div> <br>
+                                        <div>
+                                            <label for="course">Course</label>
+                                            <div class="input-select">
+                                                <select id="course" name="course">
+                                                    <option selected="" value="Default">Course</option>
+                                                    <option value="Computer Science">Computer Science</option>
+                                                </select>
+                                            </div>
+                                        </div> <br>
+                                        <div>
+                                            <label for="payment">Payment status</label>
+                                            <div class="input-select">
+                                                <select id="payment" name="payment">
+                                                    <option selected="" value="Default">Payment Stateus</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
+                                        </div> <br>
+                                        <div>
+                                            <button class="btn btn--primary" type="submit">
+                                                <span class="btn__text">Search</span>
+                                            </button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <!--end widget-->
+                                <div class="sidebar__widget">
+                                    <h5>Popular Location</h5>
+                                    <ul class="tag-cloud">
+                                        <li>
+                                            <a href="{% url 'lagos_placement' %}">Lagos</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'oyo_placement' %}">Oyo</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'abuja_placement' %}">Abuja</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'ondo_placement' %}">Ondo</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end widget-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+          {% endblock%}
+
+
+
+
+
+<!--
+<html>
+<head>
+    <title>search</title>
+</head>
+<body>
+<div align="center">
+<h2>Internship Search</h2>
+    <div>
+         <div class="module" id="changelist">
+
+
+<div id="toolbar">
+    <form method="GET" action="">
+<div><!-- DIV needed for valid HTML
+<img src="/static/admin/img/search.svg" alt="Search"><p>
+        <input type="text" size="40" name="keyword" value="{{request.get.keyword}}" id="id_keyword" placeholder="Keyword" />
+
+    </p>
+<input type="text" size="40" name="city" value="{{request.get.city}}" id="id_q" placeholder="city/state"/>
+<input type="submit" value="Search"/>
+
+</div>
+   </form>
+</div>
+
+    </div>
+
+</br>
+  {% if query_set%}
+{% for intern in query_set%}
+<strong>{{intern.name_of_org}}</strong>
+<p>
+   <strong>{{intern.address}}</strong>
+</p>
+<p>
+   <strong>{{intern.state}}</strong>
+</p>
+<p>
+   <strong>{{intern.course}}</strong>
+</p>
+        <a href="#">more info...</a>
+<hr>
+
+    {% endfor%}
+
+{% else %}
+    <h1>No result</h1>
+    <br>no result for: {{query}}
+ {% endif %}
+
+</body>
+
+</html> -->
+
+

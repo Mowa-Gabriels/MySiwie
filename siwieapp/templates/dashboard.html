@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title%}<title>Dashboard | MySiwie </title>{% endblock%}
+{% block content%}
+        <style>
+            .dropdown__sec .dropdown__trigger {
+                cursor: pointer;
+                user-select: none;
+            }
+            a{
+                color: #666666;
+                font-weight: 0;
+                text-decoration: none;
+                font-weight: 1;
+            }
+            a:hover {
+                color: #000;
+                text-decoration: none;
+            }
+        </style>
+
+
+        <div class="main-container">
+            <!-- <section> -->
+                <section class="height-10" style="padding:1em 0;">
+                    <div class="container">
+                        <input type="text" name="date" class="datepicker" placeholder="Choose a date" />
+                    </div>
+                </section>
+                <div class="container">
+                    <h2>eLogbook</h2>
+                    <div class="row justify-content-center">
+
+                        <div class="col-md-10">
+
+                            <div class="process-1">
+                                {% for logbook in logbooks%}
+                                <div class="process__item">
+                                    <a href="#">
+                                        <h4>Week{{logbook.week}},Day {{logbook.day}}</h4>
+                                        <p>
+                                            {{logbook.log_details}} <br>
+                                            <span>- {{logbook.date_posted}}</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                 {% endfor%}
+
+
+                            </div>
+                            <!--end process-->
+                        </div>
+
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            <!-- </section> -->
+
+        </div>
+        <!--<div class="loader"></div>-->
+        <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+            <i class="stack-interface stack-up-open-big"></i>
+        </a>
+   {% endblock%}

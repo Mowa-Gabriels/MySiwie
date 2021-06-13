@@ -1,0 +1,404 @@
+{% load static%}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        {% block title%}<title>Find an Internship Nearby | MySiwie </title>{% endblock%}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Site Description Here">
+        <link href="{% static 'siwieapp/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{% static 'siwieapp/css/stack-interface.css' %}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{% static 'siwieapp/css/socicon.css' %}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{% static 'siwieapp/css/lightbox.min.css' %}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{% static 'siwieapp/css/flickity.css' %}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{% static 'siwieapp/css/iconsmind.css' %}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{% static 'siwieapp/css/jquery.steps.css' %}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{% static 'siwieapp/css/theme.css' %}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{% static 'siwieapp/css/custom.css' %}" rel="stylesheet" type="text/css" media="all" />
+         <link href="{% static 'siwieapp/css/button.css' %}" rel="stylesheet" type="text/css" media="all" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>
+            .dropdown__sec .dropdown__trigger {
+                cursor: pointer;
+                user-select: none;
+            }
+        </style>
+    </head>
+    <body class=" ">
+        <a id="start"></a>
+        <div class="nav-container ">
+            <div class="bar bar--sm visible-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3 col-md-2">
+                            <a href="{% url 'index' %}">
+                                <span>
+                                    <h3 style="font-weight: bold;margin:0;">MySiwie</h3>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="col-9 col-md-10 text-right">
+                            <a href="#" class="hamburger-toggle" data-toggle-class="#menu2;hidden-xs hidden-sm">
+                                <i class="icon icon--sm stack-interface stack-menu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </div>
+            <!--end bar-->
+
+            <!-- make bar transaparent -->
+            <!-- bar--transparent bar--absolute -->
+
+            <nav id="menu2" class="bar bar-2 hidden-xs " data-scroll-class="90vh:pos-fixed">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2 text-center text-left-sm hidden-xs order-lg-2">
+                            <div class="bar__module">
+                                <a href="{% url 'index' %}">
+                                    <span>
+                                        <h3 style="font-weight: bold;margin:0;">MySiwie</h3>
+                                    </span>
+                                </a>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <div class="col-lg-5 order-lg-1">
+                            <div class="bar__module">
+                                <ul class="menu-horizontal text-left">
+                                    <li class="dropdown__sec">
+                                        <a href="{% url 'index' %}">
+                                            <span class="dropdown__trigger">Home</span>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown__sec">
+                                        <a href="{% url 'about' %}">
+                                            <span class="dropdown__trigger">About</span>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown__sec">
+                                        <a href="{% url 'employers_list' %}">
+                                            <span class="dropdown__trigger">Employers</span>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown__sec">
+                                        <a href="{% url 'dashboard' %}">
+                                            <span class="dropdown__trigger">My LogBook</span>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown__sec">
+                                        <a href="{% url 'profile' %}">
+                                            <span class="dropdown__trigger">Profile</span>
+                                        </a>
+                                    </li>
+                                     {% if user.is_admin%}
+                                    <li class="dropdown__sec">
+                                        <a href="{% url 'profile' %}">
+                                            <span class="dropdown__trigger">Add Listings</span>
+                                        </a>
+                                    </li>
+                                    {% endif%}
+                                </ul>
+                            </div>
+                            <!--end module-->
+                        </div>
+                        <div class="col-lg-5 text-right text-left-xs text-left-sm order-lg-3">
+                            <div class="bar__module">
+                                {% if user.is_authenticated %}
+                                 <a class="btn btn--sm btn--primary type--uppercase" href="{% url 'logout' %}">
+                                    <span class="btn__text">
+                                        Log Out
+                                    </span>
+                                </a>
+                                {% else %}
+                                <a class="btn btn--sm type--uppercase" href="{% url 'register' %}">
+                                    <span class="btn__text">
+                                        Sign Up
+                                    </span>
+                                </a>
+                                <a class="btn btn--sm btn--primary type--uppercase" href="{% url 'login' %}">
+                                    <span class="btn__text">
+                                        Log In
+                                    </span>
+                                </a>
+                                {% endif %}
+                            </div>
+                            <!--end module-->
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </nav>
+            <!--end bar-->
+        </div>
+        {% block content%}
+        <div class="main-container">
+            <section class="bg--secondary text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>Find an Internship Today</h1>
+                            <p class="lead">
+                                Browse internship jobs from over 1,000 high-profile employers
+                            </p>
+                            <div class="boxed boxed--lg bg--white text-left">
+                                <form method="GET" action="{% url 'search' %}" class="form--horizontal row">
+                                    <div class="col-md-4">
+                                        <input type="text" name="keyword" value="{{request.get.keyword}}" id="id_keyword" placeholder="Keywords" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="city" value="{{request.get.city}}" id="id_city" placeholder="Address, City, State.." />
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn--primary type--uppercase">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+            <section class="bg--secondary">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="heading-block text-center">
+                                <h3>Recent Listings</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of row-->
+
+                    <div class="row">
+                        {% for intern in internship %}
+                        <div class="col-md-4">
+
+                            <a class="block">
+                                <div class="feature feature-1 boxed boxed--border">
+                                    <span class="label">{{intern.state}}</span>
+                                    <h5>{{intern.name_of_org}}</h5>
+                                    <p>
+                                    <p>
+                                        {{intern.address}}
+                                    </p>
+                                    <a href="{% url 'detail' intern.id   %}">
+                                        View
+                                    </a>
+
+                                </div>
+
+                                <!--end feature-->
+                            </a>
+
+                        </div>{% endfor %}
+
+
+
+                    </div>
+                    <!--end of row-->
+                </div>
+
+                <!--end of container-->
+            </section>
+            <section class="bg--secondary">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="heading-block text-center">
+                                <h3>Popular Location</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7 col-6">
+                            <a href="{% url 'lagos_placement' %}" class="block">
+                                <div class="feature feature-7 boxed text-center imagebg" data-overlay="2">
+                                    <div class="background-image-holder" style="background-color: rgba(0, 0, 0, 0); background-position: initial; background-repeat: repeat; background-attachment: scroll; background-image: url(&quot;img/tourism-2.jpg&quot;); background-size: auto; background-origin: padding-box; background-clip: border-box; opacity: 1;">
+                                        <img alt="background" src="{% static 'siwieapp/img/tourism-2.jpg' %}">
+                                    </div>
+                                    <h4 class="pos-vertical-center">Lagos</h4>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-5 col-6">
+                            <a href="{% url 'oyo_placement' %}" class="block">
+                                <div class="feature feature-7 boxed text-center imagebg" data-overlay="2">
+                                    <div class="background-image-holder" style="background-color: rgba(0, 0, 0, 0); background-position: initial; background-repeat: repeat; background-attachment: scroll; background-image: url(&quot;img/tourism-3.jpg&quot;); background-size: auto; background-origin: padding-box; background-clip: border-box; opacity: 1;">
+                                        <img alt="background" src="{% static 'siwieapp/img/tourism-3.jpg' %}">
+                                    </div>
+                                    <h4 class="pos-vertical-center">Oyo</h4>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-5 col-6">
+                            <a href="{% url 'abuja_placement' %}" class="block">
+                                <div class="feature feature-7 boxed text-center imagebg" data-overlay="2">
+                                    <div class="background-image-holder" style="background-color: rgba(0, 0, 0, 0); background-position: initial; background-repeat: repeat; background-attachment: scroll; background-image: url(&quot;img/tourism-4.jpg&quot;); background-size: auto; background-origin: padding-box; background-clip: border-box; opacity: 1;">
+                                        <img alt="background" src="{% static 'siwieapp/img/tourism-4.jpg' %}">
+                                    </div>
+                                    <h4 class="pos-vertical-center">Abuja</h4>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-7 col-6">
+                            <a href="{% url 'ondo_placement' %}" class="block">
+                                <div class="feature feature-7 boxed text-center imagebg" data-overlay="5">
+                                    <div class="background-image-holder" style="background-color: rgba(0, 0, 0, 0); background-position: initial; background-repeat: repeat; background-attachment: scroll; background-image: url(&quot;img/tourism-5.jpg&quot;); background-size: auto; background-origin: padding-box; background-clip: border-box; opacity: 1;">
+                                        <img alt="background" src="{% static 'siwieapp/img/tourism-5.jpg' %}">
+                                    </div>
+                                    <h4 class="pos-vertical-center">Ondo</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+
+            <section class="switchable feature-large">
+                <div class="container">
+                    <div class="row justify-content-around">
+                        <div class="col-md-6">
+                            <img alt="Image" class="border--round" src="{% static 'siwieapp/img/recruitment-3.jpg' %}" />
+                        </div>
+                        <div class="col-md-6 col-lg-5">
+                            <div class="switchable__text">
+                                <h2>Record your day to day activity within the months of internship</h2>
+                                <p class="lead">
+                                    MySiwie notify you to record your day and never miss a day at work with pushed notification.
+                                </p>
+                                <a href="#">Get Started &raquo;</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+            {% endblock%}
+
+             <!-- Button -->
+            <div class="fabs">
+                <a href="{% url 'dashboard' %}" class="fab"><i class="zmdi zmdi-home"></i></a>
+                <a href="{% url 'add_log' %}" class="fab"><i class="zmdi zmdi-book"></i></a>
+                <a id="prime" class="fab"><i class="prime zmdi zmdi-plus"></i></a>
+            </div>
+            <!-- End button -->
+            <footer class="space--sm footer-2 bg--dark ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 col-6">
+                            <h6 class="type--uppercase">Company</h6>
+                            <ul class="list--hover">
+                                <li>
+                                    <a href="{% url 'about' %}">About</a>
+                                </li>
+                                <li>
+                                    <a href="#">Our Team</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-lg-3 col-6">
+                            <h6 class="type--uppercase">Community</h6>
+                            <ul class="list--hover">
+                                <li>
+                                    <a href="#">Facebook</a>
+                                </li>
+                                <li>
+                                    <a href="#">Twitter</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-lg-3 col-6">
+                            <h6 class="type--uppercase">Support</h6>
+                            <ul class="list--hover">
+                                <li>
+                                    <a href="#">Help Desk</a>
+                                </li>
+                                <li>
+                                    <a href="#">Live Chat</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-lg-3 col-6">
+                            <h6 class="type--uppercase">Locations</h6>
+                            <ul class="list--hover">
+                                <li>
+                                    <a href="{% url 'lagos_placement' %}">Lagos</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'oyo_placement' %}">Oyo</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span class="type--fine-print">&copy;
+                                <span class="update-year"></span> MySiwie</span>
+                            <a class="type--fine-print" href="#">Privacy Policy</a>
+                            <a class="type--fine-print" href="#">Legal</a>
+                        </div>
+                        <div class="col-md-6 text-right text-left-xs">
+                            <ul class="social-list list-inline list--hover">
+                                <li>
+                                    <a href="#">
+                                        <i class="socicon socicon-google icon icon--xs"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="socicon socicon-twitter icon icon--xs"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="socicon socicon-facebook icon icon--xs"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="socicon socicon-instagram icon icon--xs"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </footer>
+        </div>
+        <!--<div class="loader"></div>-->
+        <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+            <i class="stack-interface stack-up-open-big"></i>
+        </a>
+        <script src="{% static 'siwieapp/js/jquery.min.js' %}"></script>
+        <script src="{% static 'siwieapp/js/flickity.min.js' %}"></script>
+        <script src="{% static 'siwieapp/js/easypiechart.min.js' %}"></script>
+        <script src="{% static 'siwieapp/js/parallax.js' %}"></script>
+        <script src="{% static 'siwieapp/js/typed.min.js' %}"></script>
+        <script src="{% static 'siwieapp/js/datepicker.js' %}"></script>
+        <script src="{% static 'siwieapp/js/isotope.min.js' %}"></script>
+        <script src="{% static 'siwieapp/js/ytplayer.min.js' %}"></script>
+        <script src="{% static 'siwieapp/js/lightbox.min.js' %}"></script>
+        <script src="{% static 'siwieapp/js/granim.min.js' %}"></script>
+        <script src="{% static 'siwieapp/js/jquery.steps.min.js' %}"></script>
+        <script src="{% static 'siwieapp/js/countdown.min.js' %}"></script>
+        <!-- <script src="js/twitterfetcher.min.js"></script> -->
+        <!-- <script src="js/spectragram.min.js"></script> -->
+        <script src="{% static 'siwieapp/js/smooth-scroll.min.js' %}"></script>
+        <script src="{% static 'siwieapp/js/scripts.js' %}"></script>
+         <script id="rendered-js" src="{% static 'siwieapp/js/renderbtn.js' %}"></script>
+    </body>
+</html>

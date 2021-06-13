@@ -1,0 +1,59 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title%}<title>MyProfile | MySiwie </title>{% endblock%}
+{% block content%}
+        <div class="main-container">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="boxed boxed--lg boxed--border">
+                            <div class="text-block text-center">
+                                <img alt="avatar" src="{{ user.profile.profile_image.url}}" class="image--md">
+                                <span class="h5">{{request.user.first_name}} {{request.user.last_name}}</span>
+                               <a href="{% url 'profile_edit'  %}">
+
+                                   <span class="label">Edit Profile</span></a>
+                            </div>
+                            <div class="text-block clearfix text-center">
+                                <ul class="row row--list">
+                                    <li class="col-md-4">
+                                        <span class="type--fine-print block">Organization:</span>
+                                        <a>
+                                           <span><b>{{request.user.profile.placement_addr}}</b></span>
+                                        </a>
+                                    </li>
+                                    <li class="col-md-4">
+                                        <span class="type--fine-print block">Department:</span>
+                                        <span>{{user.profile.course_of_interest}}</span>
+                                    </li>
+                                    <li class="col-md-4">
+                                        <span class="type--fine-print block">Contact:</span>
+                                        <a href="#">{{request.user.email}}</a>
+                                    </li>
+                            </ul></div>
+                            
+                        </div>
+                        <div class="boxed boxed--border">
+                            <h4>Recent Log</h4>
+                            <ul>
+                                <li class="clearfix">
+                                    <div class="row">
+                                        {% for log in logbook%}
+
+                                        <div class="col-md-8 col-7">
+                                            <span class="type--fine-print">{{log.date_posted}}</span>
+                                            <a href="#" class="block color--primary"> <p> {{log.log_details}}</p></a>
+
+                                        </div>
+                                        {% endfor%}
+                                    </div>
+                                    <hr>
+                                </li>
+                            </ul>
+                            <a href="{% url 'dashboard' %}" class="type--fine-print pull-right">View All</a>
+                        </div>
+                    </div>
+                </div>
+                <!--end of row-->
+            </div>
+           {%endblock%}

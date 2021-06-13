@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+{% load static %}
+ {% block title%}<title>Find an Internship Nearby | MySiwie </title>{% endblock%}
+{% block content%}
+
+        <div class="main-container">
+            <section class="bg--secondary text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>Find an Internship Today</h1>
+                            <p class="lead">
+                                Browse internship jobs from over 1,000 high-profile employers
+                            </p>
+                            <div class="boxed boxed--lg bg--white text-left">
+                                <form method="GET" action="{% url 'search' %}" class="form--horizontal row">
+                                    <div class="col-md-4">
+                                        <input type="text" name="keyword" value="{{request.get.keyword}}" id="id_keyword" placeholder="Keywords" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="city" value="{{request.get.city}}" id="id_city" placeholder="Address, City, State.." />
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn--primary type--uppercase">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+            <section class="bg--secondary">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="heading-block text-center">
+                                <h3>Internship Listings</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of row-->
+
+                    <div class="row">
+                        {% for intern in internship %}
+                        <div class="col-md-4">
+
+                            <a class="block" href="#">
+                                <div class="feature feature-1 boxed boxed--border">
+                                    <span class="label">{{intern.state}}</span>
+                                    <h5>{{intern.name_of_org}}</h5>
+                                    <p>
+                                        {{intern.address}}
+                                    </p>
+                                    <a href="{% url 'detail' intern.id   %}">
+                                        View
+                                    </a>
+
+                                </div>
+
+                                <!--end feature-->
+                            </a>
+
+                        </div>{% endfor %}
+
+
+
+                    </div>
+                    <!--end of row-->
+                </div>
+
+                <!--end of container-->
+            </section>
+
+            {% endblock%}

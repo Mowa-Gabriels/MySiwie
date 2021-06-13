@@ -1,0 +1,109 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title%}<title>MyProfile | MySiwie </title>{% endblock%}
+{% block content%}
+      <div class="main-container">
+            <section class="bg--secondary space--sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="boxed boxed--lg boxed--border">
+                                <div class="text-block text-center">
+                                    <img alt="avatar" src="{% static 'siwieapp/img/avatar-round-3.png' %}" class="image--sm">
+                                    <span class="h5">{{request.user.first_name}} {{request.user.last_name}}</span>
+                                    <span class="label">In Siwes</span>
+                                </div>
+                                <hr>
+                                <div class="text-block">
+                                    <ul class="menu-vertical">
+                                        <li>
+                                            <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-profile;hidden">Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-password;hidden">Password</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-delete;hidden">Delete Account</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="boxed boxed--lg boxed--border">
+                                <div id="account-profile" class="account-tab">
+                                    <h4>Profile</h4>
+                                    <form method="post" enctype="multipart/form-data">
+                                        {%csrf_token%}
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label>Firstname:</label>
+                                                <input type="text" name="first_name" value="{{user.first_name}}" maxlength="30" id="id_first_name">
+                                            </div>
+                                             <div class="col-md-12">
+                                                <label>Lastname:</label>
+                                                <input type="text" name="last_name" value="{{user.last_name}}" maxlength="30" id="id_last_name">
+
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label>Email Address:</label>
+                                                <input type="email" name="email" value="{{user.email}}" maxlength="30" id="id_email">
+                                            </div>
+                                           <div class="col-md-12">
+                                                <label>Department:</label>
+                                                <input type="text" name="course_of_interest" value="{{user.profile.course_of_interest}}" maxlength="225" id="id_course_of_interest">
+                                            </div>
+                                             <div class="col-md-12">
+                                                <label>Placement Address:</label>
+                                                <input type="text" name="placement_addr" value="{{user.profile.placement_addr}}" maxlength="225" id="id_placement_addr">
+                                            </div>
+                                             <div class="col-md-12">
+                                                <label>Profile Picture:</label>
+                                                <input type="file" name="profile_image" accept="image/*" id="id_profile_image"></p>
+
+                                            </div>
+                                            <div class="col-lg-3 col-md-4">
+                                                <button type="submit" class="btn btn--primary type--uppercase">Save Profile</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="account-password" class="hidden account-tab">
+                                    <h4>Password</h4>
+                                    <p>Passwords must be at least 6 characters in length.</p>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label>Old Password:</label>
+                                                <input type="password" name="old-password">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>New Password:</label>
+                                                <input type="password" name="new-password">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Retype New Password:</label>
+                                                <input type="password" name="new-password-confirm">
+                                            </div>
+                                            <div class="col-lg-3 col-md-4">
+                                                <button type="submit" class="btn btn--primary type--uppercase">Save Password</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="account-delete" class="hidden account-tab">
+                                    <h4>Delete Account</h4>
+                                    <p>Permanently remove your account using the button below. Warning, this action is permanent.</p>
+                                    <form>
+                                        <button type="submit" class="btn bg--error type--uppercase">Delete Account</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+           {%endblock%}
+
