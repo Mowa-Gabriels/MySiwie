@@ -27,12 +27,10 @@
                     <div class="container">
                         <div class="boxed boxed--lg bg--white text-left">
                                 <form method="GET" action="{% url 'log_search' %}" class="form--horizontal row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <input type="text" name="keyword" value="{{request.get.keyword}}" id="id_keyword" placeholder="Keywords" />
                                     </div>
-                                    <div class="col-md-4">
-                                        <input type="text" name="date" value="{{request.get.date}}" id="id_date" placeholder="week, days, date.." />
-                                    </div>
+
 
                                     <div class="col-md-3">
                                         <button type="submit" class="btn btn--primary type--uppercase">Search</button>
@@ -49,7 +47,7 @@
                             <div class="process-1">
                                 {% for logbook in page.object_list%}
                                 <div class="process__item">
-                                    <a href="#">
+                                    <a href="{% url 'log_single' logbook.id %}">
                                         <h4>Week{{logbook.week}},Day {{logbook.day}}</h4>
                                         <p>
                                             {{logbook.log_details}} <br>

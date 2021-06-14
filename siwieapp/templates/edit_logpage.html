@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% load static %}
+
+        {% block title%}<title>Add Log | MySiwie </title>{% endblock %}
+      {% block content%}
+
+     <div class="main-container">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="boxed boxed--lg boxed--border">
+
+                            <h4>Date Published:  {{logbook.date_posted}}</h4>
+                            <p>Edit your draft.</p>
+                            <form method="post">
+                              {%csrf_token%}
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{form.as_p}}
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn--primary">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--end of row-->
+            </div>
+</form>
+          {% endblock%}

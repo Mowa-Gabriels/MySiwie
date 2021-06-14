@@ -2,8 +2,17 @@ from django.shortcuts import render, HttpResponseRedirect,redirect,reverse
 from .forms import SignUpForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.views import PasswordChangeView
+from .forms import PasswordChangingForm
+from django.urls import reverse_lazy
 
 # Create your views here.
+class PasswordsChangeView(PasswordChangeView):
+    form_class = PasswordChangingForm
+    success_url = reverse_lazy('profile')
+    template_name = 'authentication/profile_passwordedit.html'
+
+
 def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -18,9 +27,6 @@ def register(request):
 
     else:
         form = SignUpForm()
-
-
-
 
     return render(request, 'authentication/signup.html',{
             'form': form}

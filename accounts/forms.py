@@ -1,6 +1,7 @@
 from django import forms
 from siwieapp.models import User, Profile
 from django.forms import ModelForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 
@@ -37,3 +38,11 @@ class ProfileForm(ModelForm):
             'course_of_interest': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'col': 20})
         }
 
+class PasswordChangingForm(PasswordChangeForm):
+
+    class Meta:
+        model = User
+        fields = ['old_passord',
+                  'new_password1',
+                  'new_password2',
+        ]

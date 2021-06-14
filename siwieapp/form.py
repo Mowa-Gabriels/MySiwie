@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from .models import Profile,User, Logbook
+from django import forms
 
 
 class ProfileForm(ModelForm):
@@ -13,7 +14,12 @@ class UserForm(ModelForm):
         fields = ['first_name', 'last_name']
 
 class LogForm(ModelForm):
+
+    log_details = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'type': 'text'}))
     class Meta:
         model = Logbook
         fields = ['week', 'day', 'log_details']
+
+
+
 

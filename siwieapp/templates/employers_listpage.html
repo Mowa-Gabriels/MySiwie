@@ -44,7 +44,7 @@
                     <!--end of row-->
 
                     <div class="row">
-                        {% for intern in internship %}
+                        {% for intern in page.object_list %}
                         <div class="col-md-4">
 
                             <a class="block" href="#">
@@ -68,6 +68,30 @@
 
 
                     </div>
+                     <section>
+
+                             <div class="page-links" align="center">
+
+                                    {% if page.has_previous %}
+
+
+                                    <a href="{% url 'employers_list' %}?page= {{page.previous_page_number}}">previous</a> |
+                                    {% endif %}
+
+                                 {% for num in page.paginator.page_range %}
+                                    {% if page.number == num%}
+                               <a href="{% url 'employers_list'%}?page={{num}}">{{num}}</a>
+                                {%elif num > page.number|add:'-3' and num < page.number|add:'3' %}
+                                <a href="{% url 'employers_list'%}?page={{num}}">{{num}}</a>
+                                {%endif%}
+                                     {%endfor%}
+                                 {% if page.has_next %}
+                                 <a  href="{% url 'employers_list' %}?page= {{page.next_page_number}}"> | Next</a>
+                                 {% endif %}
+
+
+                                </div>
+                            </section>
                     <!--end of row-->
                 </div>
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect,redirect
+from django.shortcuts import render, HttpResponseRedirect,redirect,get_object_or_404
 from .models import Internship, Logbook
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -19,8 +19,11 @@ def Index(request):
 @login_required()
 def Employers_list(request):
     internship = Internship.objects.all().order_by('-name_of_org')
+    internship_paginator = Paginator(internship, 6)
+    page_num = request.GET.get('page')
+    page = internship_paginator.get_page(page_num)
 
-    context = {'internship': internship}
+    context = {'page': page}
     return render(request, 'employers_listpage.html', context)
 
 def search(request):
@@ -151,6 +154,13 @@ def Dashboard(request):
                  'count': log_paginator.count}
       return render(request, 'dashboard.html', context)
 
+def log_detail(request, logbook_id):
+    logbook = Logbook.objects.get(pk=logbook_id)
+    context = {
+        'logbook': logbook
+    }
+    return render(request, 'log-single.html', context)
+
 @login_required()
 def Profile(request):
       internship = Internship.objects.all()
@@ -174,6 +184,7 @@ def Detail(request, intern_id):
         'intern': intern
     }
     return render(request, 'career-single.html', context)
+
 
 @login_required()
 def OndoSearch(request):
@@ -297,8 +308,6 @@ from django.utils import timezone
 @login_required()
 def Addlog(request):
     now = timezone.now()
-
-
     if request.method == 'POST':
         form = LogForm(request.POST)
 
@@ -310,13 +319,34 @@ def Addlog(request):
             return redirect('dashboard')
     else:
         form = LogForm()
-
     context = {
         'form': form,
         'now': now,
-
     }
     return render(request, 'add_log.html', context)
+
+def Addlog_Edit(request, logbook_id):
+
+    logbook = get_object_or_404(Logbook, id=logbook_id)
+
+    now = timezone.now()
+    if request.method == 'POST':
+        form = LogForm(request.POST, instance=logbook)
+
+        if form.is_valid:
+            new_form = form.save(commit=False)
+            new_form.user = request.user
+            new_form.save()
+
+            return redirect('dashboard')
+    else:
+        form = LogForm(instance=logbook)
+    context = {
+        'logbook': logbook,
+        'form': form,
+        'now': now,
+    }
+    return render(request, 'edit_logpage.html', context)
 
 
 @login_required()

@@ -16,11 +16,9 @@
                                 <hr>
                                 <div class="text-block">
                                     <ul class="menu-vertical">
+
                                         <li>
-                                            <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-profile;hidden">Profile</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-password;hidden">Password</a>
+                                            <a href="{% url 'password_change' %}">Password</a>
                                         </li>
                                         <li>
                                             <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-delete;hidden">Delete Account</a>
@@ -68,29 +66,8 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div id="account-password" class="hidden account-tab">
-                                    <h4>Password</h4>
-                                    <p>Passwords must be at least 6 characters in length.</p>
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <label>Old Password:</label>
-                                                <input type="password" name="old-password">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label>New Password:</label>
-                                                <input type="password" name="new-password">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label>Retype New Password:</label>
-                                                <input type="password" name="new-password-confirm">
-                                            </div>
-                                            <div class="col-lg-3 col-md-4">
-                                                <button type="submit" class="btn btn--primary type--uppercase">Save Password</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+
+
                                 <div id="account-delete" class="hidden account-tab">
                                     <h4>Delete Account</h4>
                                     <p>Permanently remove your account using the button below. Warning, this action is permanent.</p>
