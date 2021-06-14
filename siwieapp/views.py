@@ -7,12 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from django.contrib import messages
-
-
-
-# Create your views here.
-
-
+from django.core.paginator import Paginator
 
 @login_required()
 def Index(request):
@@ -81,14 +76,65 @@ def search(request):
     else:
         query_set = internship
 
-
-
     context = {'internship':internship,
                'query_set':query_set,
                'keyword':keyword,
                'city':city,
                'count': count}
     return render(request, 'search_page.html', context)
+
+def log_search(request):
+    logbook = Logbook.objects.all()
+
+
+    keyword = request.GET.get("keyword")
+    date = request.GET.get("date")
+
+    if keyword and date:
+        query_set = logbook.filter(
+            Q(log_details__icontains=keyword) |
+            Q(date_posted__icontains=date)
+
+        ).distinct()
+
+        count = logbook.filter(
+            Q(log_details__icontains=keyword) |
+            Q(date_posted__icontains=date)
+        ).count()
+
+    elif keyword:
+        query_set = logbook.filter(
+            Q(log_details__icontains=keyword)
+        ).distinct()
+        count = logbook.filter(
+            Q(log_details__icontains=keyword)
+        ).count()
+
+    elif date:
+        query_set = logbook.filter(
+
+            Q(date_posted__icontains=date)
+
+        ).distinct()
+
+        count = logbook.filter(
+
+            Q(date_posted__icontains=date)
+
+        ).count()
+
+    else:
+        query_set = logbook
+
+
+
+    context = {'logbook':logbook,
+               'query_set':query_set,
+               'keyword':keyword,
+               'date':date,
+               'count': count}
+
+    return render(request, 'logsearch.html', context)
 
 
 @login_required()
@@ -97,7 +143,12 @@ def Dashboard(request):
 
       logbooks = Logbook.objects.filter(user = log_user)
 
-      context = {'logbooks':logbooks}
+      log_paginator = Paginator(logbooks, 5)
+      page_num = request.GET.get('page')
+      page = log_paginator.get_page(page_num)
+
+      context = {'page':page,
+                 'count': log_paginator.count}
       return render(request, 'dashboard.html', context)
 
 @login_required()

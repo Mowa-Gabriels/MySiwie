@@ -1,5 +1,6 @@
 {% extends 'authentication/login.html' %}
 {% load static %}
+{% load crispy_forms_tags%}
 
        {% block title%} <title>Register | MySiwie </title>{% endblock%}
 
@@ -41,17 +42,7 @@
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="col-12">
-                                        <input type="text" name="username" placeholder="username" />
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="email" name="email" placeholder="Email Address" />
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="password" name="password1" placeholder="Password" required id="id_password1/>
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="password" name="password2" placeholder="Password Confrmation"required id="id_password2 />
-                                    </div>
+                                        {{form | crispy}}</div>
 
                                     <div class="col-12">
                                         <button type="submit" class="btn btn--primary type--uppercase">Create Account</button>

@@ -21,10 +21,23 @@
 
 
         <div class="main-container">
+
             <!-- <section> -->
                 <section class="height-10" style="padding:1em 0;">
                     <div class="container">
-                        <input type="text" name="date" class="datepicker" placeholder="Choose a date" />
+                        <div class="boxed boxed--lg bg--white text-left">
+                                <form method="GET" action="{% url 'log_search' %}" class="form--horizontal row">
+                                    <div class="col-md-4">
+                                        <input type="text" name="keyword" value="{{request.get.keyword}}" id="id_keyword" placeholder="Keywords" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="date" value="{{request.get.date}}" id="id_date" placeholder="week, days, date.." />
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn--primary type--uppercase">Search</button>
+                                    </div>
+                                </form>
                     </div>
                 </section>
                 <div class="container">
@@ -34,7 +47,7 @@
                         <div class="col-md-10">
 
                             <div class="process-1">
-                                {% for logbook in logbooks%}
+                                {% for logbook in page.object_list%}
                                 <div class="process__item">
                                     <a href="#">
                                         <h4>Week{{logbook.week}},Day {{logbook.day}}</h4>
@@ -47,7 +60,33 @@
                                  {% endfor%}
 
 
+
+
                             </div>
+                            <section>
+
+                             <div class="page-links" align="center">
+
+                                    {% if page.has_previous %}
+
+
+                                    <a href="{% url 'dashboard' %}?page= {{page.previous_page_number}}">previous</a> |
+                                    {% endif %}
+
+                                 {% for num in page.paginator.page_range %}
+                                    {% if page.number == num%}
+                               <a href="{% url 'dashboard'%}?page={{num}}">{{num}}</a>
+                                {%elif num > page.number|add:'-3' and num < page.number|add:'3' %}
+                                <a href="{% url 'dashboard'%}?page={{num}}">{{num}}</a>
+                                {%endif%}
+                                     {%endfor%}
+                                 {% if page.has_next %}
+                                 <a  href="{% url 'dashboard' %}?page= {{page.next_page_number}}"> | Next</a>
+                                 {% endif %}
+
+
+                                </div>
+                            </section>
                             <!--end process-->
                         </div>
 

@@ -39,9 +39,9 @@ def login_validate(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse('profile'))
+            return HttpResponseRedirect(reverse('index'))
         else:
-            messages.warning(request, "Invalid Login Details")
+            messages.success(request, "Invalid Login Details", extra_tags='alert alert-success')
 
     context = {}
     return render(request, 'authentication/login.html', context)

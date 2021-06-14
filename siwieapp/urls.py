@@ -10,6 +10,7 @@ urlpatterns = [
   path('profile/update/', ProfileUpdateView.as_view(), name='profile_edit'),
  path('internship/placement/detail/<intern_id>', views.Detail, name='detail'),
  path('search/', views.search, name='search'),
+ path('log_search/', views.log_search, name='log_search'),
  path('employersLisT_placeEMent/', views.Employers_list, name='employers_list'),
  path('internship/ondo_placement/', views.OndoSearch, name='ondo_placement'),
  path('internship/lagos_placement/', views.LagosSearch, name='lagos_placement'),

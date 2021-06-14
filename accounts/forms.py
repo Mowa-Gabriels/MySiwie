@@ -7,8 +7,6 @@ from django.db import transaction
 class SignUpForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}))
     email = forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control', 'type': 'email'}))
-    password1 = forms.CharField(max_length=100,
-                                widget=forms.PasswordInput(attrs={'class': 'form-control', 'type': 'password'}))
 
     class Meta:
         model = User

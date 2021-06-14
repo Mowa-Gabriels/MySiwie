@@ -66,8 +66,18 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-7">
 
-                            <h2>Create a MySiwie account</h2>
+                            <h2>Sign in</h2>
                             <p class="lead">Ready to Log your activities today?.</p>
+                             {% if messages %}
+                                 {% for message in messages %}
+
+                                 <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                    <strong>{{message}}</strong>
+
+                                 </div>
+                                  {% endfor%}
+                            {% endif %}
+
 
 
                             <form method="post" action="{% url 'login_validate'%}">
